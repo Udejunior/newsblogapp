@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="roww">
+
+        {% for abc in full_post %}
+
+  <main class="colu" style="border: 1px dashed red; margin-bottom: 10px; padding: 10px; b"> 
+    <h2> <a href="#"></a> {{abc.title}} </a> </h2>
+    {% if abc.image %}
+         <img src="{{abc.image.url}}" style="width: 100%; height: auto; object-fit: cover">
+         {% endif %} 
+         <p>{{abc.body| truncatechars:100}}</p>
+       <p>By {{abc.author}} on {{ abc.created_at}}</p>
+           <a href="#">Read More</a>
+           <hr>
+
+
+
+
+  </main>
+
+        {% endfor %}
+    </section>
+        {% endblock %}
+</body>
+</html>
