@@ -1,27 +1,42 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<section class="roww">
+
+<main class='container'>
+<div class="row">
+
+<aside class="col-3">
+  <h1>Wideget sidebar</h1>
+   </aside>
+
+
+
+<section class="roww col">
 
         {% for abc in full_post %}
 
-  <main class="colu" style="border: 1px dashed red; margin-bottom: 10px; padding: 10px; b"> 
-    <h2> <a href="#"></a> {{abc.title}} </a> </h2>
+  <main class="colu" style="border: 1px dashed red; margin-bottom: 10px; padding: 10px;"> 
+    <h2> <a href="{% url 'post_detail' slug=abc.slug %}"> {{abc.title}} </a> </h2>
     {% if abc.image %}
          <img src="{{abc.image.url}}" style="width: 100%; height: auto; object-fit: cover">
          {% endif %} 
          <p>{{abc.body| truncatechars:100}}</p>
        <p>By {{abc.author}} on {{ abc.created_at}}</p>
-           <a href="#">Read More</a>
+           <a href="{% url 'post_detail' slug=abc.slug %}">Read More</a>
            <hr>
 
-
-
-
-  </main>
+   </main>
 
         {% endfor %}
     </section>
+
+   <aside class="col-3">
+  <h1>Wideget sidebar</h1>
+   </aside>
+
+
+     </div>  
+  </main>
         {% endblock %}
 </body>
 </html>

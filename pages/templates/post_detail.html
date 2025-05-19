@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>{{post.title}}</h1>
+{% if post.image %}
+         <img src="{{abc.image.url}}" style="width: 100%; height: auto; object-fit: cover">
+         {% endif %} 
+
+         <p>By {{post.author}} on {{ post.created_at}}</p>
+          <p>{{post.body}}</p>
+        
+     <hr>
+     <h4>Comments</h4>
+
+     {%  for comment in comments  %}
+     <p><strong>{{comment.author}}</strong> on {{comment.created_at}}</p>
+     <p>{{comment.body}}</p>
+  {% empty %}
+  <p>No comments yet</p>
+     {% endfor %}
+
+     {% if user.is_authenticated %}
+     <h3>Leave a comment</h3>
+        <from method='post'>
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button type='submit' class='btn btn-primary mt-2'>Submit</button>
+        </form>
+
+     {% else %}
+
+     <p> You must be logged in to leave a comment <a href="{% url 'login' %}?next={{ request.path }}" target='_blank' rel='noopener noreferrer'>Log in </a></p>
+        {% endif %}
+
+
+
+       <hr>
+{% endblock %}
+</body>
+</html>
